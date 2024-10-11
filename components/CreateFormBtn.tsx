@@ -34,7 +34,6 @@ import { FiFilePlus } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 
 function CreateFormBtn() {
-
   const router = useRouter();
 
   const form = useForm<formDataSchemaType>({
@@ -49,7 +48,6 @@ function CreateFormBtn() {
         description: "Your form has been created successfully",
       });
       router.push(`/builder/${formId}`);
-      
     } catch (e) {
       toast({
         title: "Error",
