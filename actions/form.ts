@@ -1,5 +1,6 @@
 "use server";
 
+import { FormElement } from "@/components/FormElements";
 import prisma from "@/lib/prisma";
 import { formDataSchema, formDataSchemaType } from "@/schemas/form";
 import { currentUser } from "@clerk/nextjs/server";
@@ -94,6 +95,82 @@ export async function GetFormById(id: number) {
     where:{
       userId : user.id,
       id
+    }
+  })
+}
+
+
+export async function UpdateFormContent(id:number,jsonContent:string){
+  const user = await currentUser();
+
+  if(!user){
+    throw new UserNotFoundError();
+  }
+
+  return await prisma.form.update({
+    where:{
+      userId:user.id,
+      id,
+    },
+    data:{
+      content:jsonContent,
+    }
+  })
+
+}
+
+export async function PublishForm(id:number){
+  const user = await currentUser();
+
+  if(!user){
+    throw new UserNotFoundError();
+  }
+
+  return await prisma.form.update({
+    where:{
+      userId:user.id,
+      id,
+    },
+    data:{
+      published:true
+    }
+    
+  })
+
+}
+
+export async function GetFormContentByUrl(formUrl :string){
+
+
+  return await prisma.form.update({
+    data:{
+      visits:{
+        increment:1,
+      }
+    },
+    select:{
+      content:true
+    },
+    where:{
+      shareURL: formUrl,
+    },
+  })
+}
+
+export async function SubmitForm(formUrl:string, content:string){
+  return await prisma.form.update({
+    data:{
+      submissions:{
+        increment:1,
+      },
+      FormSubmissions:{
+        create:{
+          content,
+        }
+      }
+    },
+    where:{
+      shareURL:formUrl,
     }
   })
 }

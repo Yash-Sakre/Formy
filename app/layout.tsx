@@ -33,7 +33,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <DesignerContextProvider>
-          <body
+          <body 
           
           >
           
