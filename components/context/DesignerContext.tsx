@@ -4,11 +4,10 @@ import {
   createContext,
   ReactNode,
   SetStateAction,
-  useContext,
   useState,
   Dispatch,
 } from "react";
-import { FormElement, FormElementInstance } from "../FormElements";
+import {  FormElementInstance } from "../FormElements";
 
 type DesignerContenxtType = {
   elements: FormElementInstance[];

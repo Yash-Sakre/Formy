@@ -1,7 +1,5 @@
 import React from "react";
-import { UserButton } from "@clerk/nextjs";
 import { ReactNode } from "react";
-import { Logo } from "@/components/Logo";
 import { FaWpforms } from "react-icons/fa6";
 import Image from "next/image";
 

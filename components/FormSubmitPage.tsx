@@ -62,7 +62,7 @@ function FormSubmitPage({
       const jsonContent = JSON.stringify(formValue.current);
       await SubmitForm(formUrl, jsonContent);
       setSubmitted(true);
-    } catch(error) {
+    } catch {
       toast({
         title: "Form Error",
         description: "Something went wrong",

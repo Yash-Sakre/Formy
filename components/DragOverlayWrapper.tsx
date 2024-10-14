@@ -13,10 +13,10 @@ function DragOverlayWrapper() {
     onDragStart: (event) => {
       setDraggedItem(event.active);
     },
-    onDragCancel: (event) => {
+    onDragCancel: () => {
       setDraggedItem(null);
     },
-    onDragEnd: (event) => {
+    onDragEnd: () => {
       setDraggedItem(null);
     },
   });

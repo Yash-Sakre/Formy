@@ -5,14 +5,12 @@ import {
   DialogContent,
   DialogDescription,
   DialogFooter,
-  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -20,11 +18,8 @@ import {
 } from "@/components/ui/form";
 import { Button } from "./ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-import { z } from "zod";
-import { Description } from "@radix-ui/react-dialog";
 import { Input } from "./ui/input";
-import { Control, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Textarea } from "./ui/textarea";
 import { ImSpinner2 } from "react-icons/im";
 import { toast } from "@/hooks/use-toast";
@@ -48,7 +43,7 @@ function CreateFormBtn() {
         description: "Your form has been created successfully",
       });
       router.push(`/builder/${formId}`);
-    } catch (e) {
+    } catch  {
       toast({
         title: "Error",
         description: "Something went wrong",

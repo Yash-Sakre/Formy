@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ReactNode, Suspense } from "react";
+import {  Suspense } from "react";
 import { LuView } from "react-icons/lu";
 import { StatsCardsProps, StatsCardProps } from "@/types/StatsCards";
 import { Form } from "@prisma/client";

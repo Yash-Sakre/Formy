@@ -12,7 +12,6 @@ import { cn } from "@/lib/utils";
 import useDesigner from "./hooks/useDesigner";
 import {
   ElementsType,
-  FormElement,
   FormElementInstance,
   FormElements,
 } from "./FormElements";
@@ -168,8 +167,8 @@ function Designer() {
 }
 
 function DesginerElementWrapper({ element }: { element: FormElementInstance }) {
-  const [mouseIsOver, setMouseIsOver] = useState<Boolean>(false);
-  const { removeElements, setSelectedElement, selectedElement } = useDesigner();
+  const [mouseIsOver, setMouseIsOver] = useState<boolean>(false);
+  const { removeElements, setSelectedElement } = useDesigner();
 
   const DesignerElement = FormElements[element.type].designerComponent;
 
