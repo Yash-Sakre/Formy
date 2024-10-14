@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Formy
 
-## Getting Started
+Formy is a web application that empowers users to create customizable forms through an intuitive drag-and-drop interface. This tool simplifies form creation, customization, and management.
 
-First, run the development server:
+## Built With
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Next.js 13** (AppRouter)
+- **Dnd-kit** (Drag and drop functionality)
+- **ServerActions**
+- **TypeScript**
+- **Tailwind CSS / Shadcn UI** (Styling)
+- **Vercel PostgreSQL** (Database)
+- **Prisma** (ORM)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Responsive Design**: Optimized for any device, ensuring a smooth experience across different screen sizes.
+- **Drag-and-Drop Form Designer**: Create and arrange form fields with ease.
+  - **Layout fields**: Title, Subtitle, Spacer, Separator, Paragraph.
+  - **Form fields**: Text, Number, Select, Date, Checkbox, Textarea.
+- **Customization**: Easily add and customize new form fields.
+- **Form Preview**: Preview your form before sharing or submitting it.
+- **Form Sharing**: Share a unique URL to give others access to your form.
+- **Form Submissions and Validation**: Track form submissions with built-in validation.
+- **Form Stats**: Monitor form visits and submissions for better insights.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Installation
 
-## Learn More
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/Yash-Sakre/Formy.git
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+2. Navigate to the project directory:
+    ```bash
+    cd formy
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Install dependencies:
+    ```bash
+    npm install
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. Set up environment variables:
+    - Create a `.env` file in the root directory with your PostgreSQL and Vercel connection strings.
 
-## Deploy on Vercel
+5. Run the development server:
+    ```bash
+    npm run dev
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+6. Open your browser to [http://localhost:3000](http://localhost:3000) to view the project.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Usage
+
+- Drag and drop fields to create forms.
+- Customize fields and layout as per your requirements.
+- Preview your form before sharing it.
+- Share the form using a unique URL.
+- Track submission data and view stats.
+
+
