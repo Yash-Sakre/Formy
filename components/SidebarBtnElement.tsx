@@ -19,7 +19,7 @@ function SidebarBtnElement({ formElement }: { formElement: FormElement }) {
       ref={draggable.setNodeRef}
       variant={"outline"}
       className={cn(
-        "flex-col gap-2 w-1/2 h-[100px] cursor-grab ",
+        "flex-col gap-2 w-full h-[100px] cursor-grab ",
         draggable.isDragging && "ring-2 ring-primary"
       )}
       {...draggable.attributes}

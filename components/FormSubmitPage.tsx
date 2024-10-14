@@ -59,7 +59,6 @@ function FormSubmitPage({
     }
 
     try {
-      console.log("inside try ")
       const jsonContent = JSON.stringify(formValue.current);
       await SubmitForm(formUrl, jsonContent);
       setSubmitted(true);
@@ -70,13 +69,11 @@ function FormSubmitPage({
         variant: "destructive",
       });
     }
-
-    console.log("Form Value", formValue.current);
   };
 
   if (submitted) {
-    return <div className="flex items-center justify-center w-full h-full p-8 ">
-      <div className="max-w-[620px] flex flex-col gap-4 flex-grow bg-background w-full p-8 
+    return <div className="flex items-center justify-center  w-full  p-8 h-full">
+      <div className="max-w-[620px] flex  flex-col gap-4 flex-grow bg-background w-full p-8 
       overflow-y-auto border shadow-xl shadow-blue-700 rounded">
         <h1 className="text-2xl font-bold"> Form Submitted</h1>
         <p className="text-muted-foreground">Thank you for Submitting the form, you can close this page now.</p>
@@ -88,7 +85,7 @@ function FormSubmitPage({
     <div className="flex justify-center w-full h-full items-center p-8">
       <div
         key={renderKey}
-        className="max-w-[620px] flex flex-col gap-4 flex-grow bg-background w-full p-8 overflow-y-auto border shadow-xl shadow-blue-700 rounded"
+        className="max-w-[620px] flex  flex-col gap-4 items-center justify-center  bg-background w-full p-8 overflow-y-auto border shadow-xl shadow-blue-700 rounded"
       >
         {content.map((element) => {
           const FormComponent = FormElements[element.type].formComponent;

@@ -1,9 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { GetFormById } from "@/actions/form";
+import React, { ReactNode, useEffect, useState } from "react";
+import { GetFormById, GetFormWithSubmission } from "@/actions/form";
 import VisitBtn from "@/components/VisitBtn";
 import FormShareLink from "@/components/FormShareLink";
 import { LuView } from "react-icons/lu";
 import { StatsCard } from "../../page";
+import { ElementsType, FormElementInstance } from "@/components/FormElements";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { formatDate, formatDistance } from "date-fns";
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
+
+type Row = {
+  [key: string]: string;
+} & {
+  submittedAt: Date;
+};
 
 async function FormDetailPage({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -76,6 +95,117 @@ async function FormDetailPage({ params }: { params: { id: string } }) {
 
 export default FormDetailPage;
 
-function SubmissionsTable({ id }: { id: number }) {
-  return <div className="text-2xl container font-bold ">Submissions</div>;
+async function SubmissionsTable({ id }: { id: number }) {
+  const form = await GetFormWithSubmission(id);
+
+  if (!form) {
+    throw new Error("Form not found");
+  }
+
+  const formElements = JSON.parse(form.content) as FormElementInstance[];
+
+  const columns: {
+    id: string;
+    label: string;
+    required: boolean;
+    type: ElementsType;
+  }[] = [];
+
+  formElements.forEach((element) => {
+    switch (element.type) {
+      case "TextField":
+      case "NumberField":
+      case "TextAreaField":
+      case "CheckboxField":
+      case "SelectField":
+      case "DateField":
+        {
+          columns.push({
+            id: element.id,
+            label: element.extraAttribute?.label,
+            required: element.extraAttribute?.required,
+            type: element.type,
+          });
+        }
+        break;
+      default:
+        break;
+    }
+  });
+
+  const row: Row[] = [];
+
+  form.FormSubmissions.forEach((submission) => {
+    const content = JSON.parse(submission.content);
+    row.push({
+      ...content,
+      submittedAt: submission.createdAt,
+    });
+  });
+
+  return (
+    <>
+      <div className="text-2xl container font-bold ">Submissions</div>
+      <div>
+        <Table>
+          <TableCaption>A list of recent Submissions.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              {columns.map((column) => {
+                return (
+                  <TableHead key={column.id} className="uppercase">
+                    {column.label}
+                  </TableHead>
+                );
+              })}
+              <TableHead className="text-muted-foreground text-right uppercase">
+                Submitted at
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {row.map((row, index) => {
+              return (
+                <TableRow key={index}>
+                  {columns.map((column) => {
+                    return (
+                      <RowCell
+                        key={column.id}
+                        value={row[column.id]}
+                        type={column.type}
+                      />
+                    );
+                  })}
+                  <TableCell className="text-right text-muted-foreground">
+                    {formatDistance(row.submittedAt, new Date(), {
+                      addSuffix: true,
+                    })}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </div>
+    </>
+  );
+}
+
+function RowCell({ type, value }: { type: ElementsType; value: string }) {
+  let node: ReactNode = value;
+
+  switch(type){
+    case "DateField": 
+      if(!value) break;
+      const date = new Date(value);
+      node = <Badge variant={"outline"}>{formatDate(date,"dd/MM/yyyy")}</Badge>
+      break;
+    case "CheckboxField":
+      const checked = value === "true";
+      node = <Checkbox checked={checked} disabled /> 
+      break;
+
+  }
+
+  return <TableCell>{node}</TableCell>;
 }

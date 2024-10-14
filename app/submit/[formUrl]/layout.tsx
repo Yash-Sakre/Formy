@@ -10,7 +10,7 @@ function Layout({ children }: { children: ReactNode }) {
         <Logo />
    
       </nav>
-      <main className="flex w-full  justify-center h-screen">{children}</main>
+      <main className="flex w-full  justify-center ">{children}</main>
     </div>
   );
 }
